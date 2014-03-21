@@ -6,7 +6,7 @@ class CreateStores < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :zip
-
+      t.belongs_to :user
       t.timestamps
     end
   end
