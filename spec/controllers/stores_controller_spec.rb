@@ -4,11 +4,11 @@ describe StoresController do
 
   describe '#index' do
     example do
-      create(:store)
-      get :index
+      store = create(:store)
+      get :index, user_id: store.user_id
       expect(assigns(:stores)).to_not be_empty
     end
-  end 
+  end
 
   # describe '#show' do
   #   example do
@@ -16,7 +16,7 @@ describe StoresController do
   #     get :show, {id: list.id}
   #     expect(assigns(:list).name).to eq 'Grocery List'
   #   end
-  # end 
+  # end
 
-  
+
 end

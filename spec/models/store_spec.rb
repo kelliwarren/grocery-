@@ -7,7 +7,7 @@ describe Store do
     it { should validate_presence_of :street_address }
     it { should validate_presence_of :city }
     it { should validate_presence_of :zip }
-   
+
   end
 
 describe 'associations' do

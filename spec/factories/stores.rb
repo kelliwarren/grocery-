@@ -6,5 +6,6 @@ FactoryGirl.define do
     city { Faker::AddressUS.city}
     state { Faker::AddressUS.state}
     zip { Faker::AddressUS.zip_code}
+    user { create(:user) }
   end
 end
