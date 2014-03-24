@@ -27,28 +27,30 @@ describe StoresController do
       user = create(:user)
       user.stores << create(:store)
       user.stores.last.should_receive(:update_attributes!).with(name: "new name").and_return(:false)
-      # put :update, user_id: user.id, id: user.stores.last.id
       expect(user.stores.last.save).to eq(false)
     end
     example do
       user = create(:user, store_owner: true)
       user.stores << create(:store)
       user.stores.last.should_receive(:update_attributes!).with(name: "new name").and_return(:true)
-      # put :update, id: user.stores.last, :store => {name: "new name"}
       expect(user.stores.last.save).to eq(true)
     end
   end
-#only a user.store_owner should be able to delete a store
+  # #only a user.store_owner should be able to delete a store
   describe '#destoy' do
     example do
       user = create(:user)
-      user.stores << create(:store)
-      expect(user.stores.count).should eq(0)
+      store = create(:store)
+      user.stores << store
+      delete :destroy,{ user_id: store.user.id, id: store.id }
+      expect(user.stores.count).should eq(1)
     end
     example do
       user = create(:user, store_owner: true)
-      user.stores << create(:store)
-      expect(user.stores.count).should eq(1)
+      store = create(:store)
+      user.stores << store
+      delete :destroy,{ user_id: store.user.id, id: store.id }
+      expect(user.stores.count).should eq(0)
     end
   end
 end
