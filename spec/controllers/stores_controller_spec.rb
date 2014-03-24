@@ -41,7 +41,7 @@ describe StoresController do
     end
   end
   # #only a user.store_owner should be able to delete a store
-  describe '#destoy', :focus do
+  describe '#destoy' do
     example do
       user = create(:user)
       store = create(:store)
