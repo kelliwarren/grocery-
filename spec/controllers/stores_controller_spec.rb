@@ -24,7 +24,7 @@ describe StoresController do
     end
   end
   #test to make sure only a user.store_owner can update a store
-  describe '#update', :focus  do
+  describe '#update' do
     example do
       user = create(:user)
       store = create(:store)
@@ -41,20 +41,20 @@ describe StoresController do
     end
   end
   # #only a user.store_owner should be able to delete a store
-  describe '#destoy' do
+  describe '#destoy', :focus do
     example do
       user = create(:user)
       store = create(:store)
       user.stores << store
       delete :destroy,{ user_id: store.user.id, id: store.id }
-      expect(user.stores.count).should eq(1)
+      expect(user.stores.count).to eq(1)
     end
     example do
       user = create(:user, store_owner: true)
       store = create(:store)
       user.stores << store
       delete :destroy,{ user_id: store.user.id, id: store.id }
-      expect(user.stores.count).should eq(0)
+      expect(user.stores.count).to eq(0)
     end
   end
 end

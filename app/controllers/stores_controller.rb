@@ -48,10 +48,16 @@ class StoresController < ApplicationController
 
 
   def destroy
-    # @user = User.find(params[:id])
-    # @store = @user.stores.find(params[:id])
-    # @store.destroy
-    # redirect_to user_stores_path
+    puts params
+    @store = Store.find(params[:id])
+    @user = User.find(@store.user_id)
+    if @user.store_owner
+     @store.destroy
+      redirect_to users_path
+    else
+      puts false
+      redirect_to users_path
+    end
   end
 
   private
