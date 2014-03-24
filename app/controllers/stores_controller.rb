@@ -33,29 +33,29 @@ class StoresController < ApplicationController
   end
 
   def update
-    puts params
+
     @user = User.find(params[:user_id])
     @store = @user.stores.find(params[:id])
     if @user.store_owner
-      puts 'yes'
+
       @store.update_attributes(store_params)
       redirect_to users_path
     else
-      puts 'no'
+
       redirect_to users_path
     end
   end
 
 
   def destroy
-    puts params
+
     @store = Store.find(params[:id])
     @user = User.find(@store.user_id)
     if @user.store_owner
      @store.destroy
       redirect_to users_path
     else
-      puts false
+
       redirect_to users_path
     end
   end
