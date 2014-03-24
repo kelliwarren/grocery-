@@ -9,31 +9,35 @@ describe StoresController do
     end
   end
   #test to make sure only a user.store_owner can create a store
-  describe '#create' do
+  describe '#create'do
     example do
       user = create(:user)
-      user.stores << create(:store)
-      expect(user.stores.count).should eq(0)
+      store = build(:store)
+      post :create, {user_id: user.id, :store => store.attributes }
+      expect(user.stores.count).to eq(0)
     end
-    example do
+    it 'should allow a user to create a store' do
       user = create(:user, store_owner: true)
-      user.stores << create(:store)
-      expect(user.stores.count).should eq(1)
+      store = build(:store)
+      post :create, {user_id: user.id, :store => store.attributes }
+      expect(user.stores.count).to eq(1)
     end
   end
   #test to make sure only a user.store_owner can update a store
-  describe '#update' do
+  describe '#update', :focus  do
     example do
       user = create(:user)
-      user.stores << create(:store)
-      user.stores.last.should_receive(:update_attributes!).with(name: "new name").and_return(:false)
-      expect(user.stores.last.save).to eq(false)
+      store = create(:store)
+      user.stores << store
+      put :update, { user_id: store.user.id, id: store.id, :store =>{name: 'new name'} }
+      expect(user.stores.last.name).to_not eq('new name')
     end
-    example do
+    it 'should allow a user.store_owner to update a record' do
       user = create(:user, store_owner: true)
-      user.stores << create(:store)
-      user.stores.last.should_receive(:update_attributes!).with(name: "new name").and_return(:true)
-      expect(user.stores.last.save).to eq(true)
+      store = create(:store)
+      user.stores << store
+      put :update, { user_id: store.user.id, id: store.id, :store => {name: 'new name'} }
+      expect(user.stores.last.name).to eq('new name')
     end
   end
   # #only a user.store_owner should be able to delete a store
