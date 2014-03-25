@@ -3,9 +3,10 @@ require 'spec_helper'
 describe StoresController do
   describe '#index' do
     it '@stores should be available in stores/index page' do
-      store = create(:store)
+      user = create(:user, store_owner: true)
+      store = create(:store, user_id: user.id)
       get :index, user_id: store.user_id
-      expect(assigns(:stores)).to_not be_empty
+      expect(assigns(:stores)).to_not be_nil
     end
     it "should only be accessible to a user who is a store owner" do 
       user = create(:user, store_owner: true) 
@@ -24,8 +25,9 @@ describe StoresController do
 
   describe '#show' do 
     it "should be available to show view" do
-      store = create(:store)
-      get :show, id: store.id
+      user = create(:user)
+      store = create(:store, user_id: user.id)
+      get :show, user_id: user.id, id: store.id
       response.should be_success
     end
   end
