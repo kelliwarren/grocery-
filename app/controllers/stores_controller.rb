@@ -1,13 +1,13 @@
 class StoresController < ApplicationController
-  # before_action :ensure_user_and_store_owner!, except: [:show, :index]
+  # before_action :ensure_user_and_store_owner!, except: [:show]
 
   def index
-    # @user = User.find(params[:id])
-    @stores = Store.all
+    @user = User.find(params[:user_id])
+    @stores = @user.stores
   end
 
   def new
-    # @user = User.find(params[:id])
+    # @user = User.find(params[:user_id])
     # @store = @user.stores.build
   end
 
@@ -23,7 +23,7 @@ class StoresController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
+    # @user = User.find(params[:user_id])
     # @store = @user.stores.find(params[:id])
   end
 
