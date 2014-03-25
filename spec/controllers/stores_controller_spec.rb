@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe StoresController do
   describe '#index' do
-    it 'should make @stores available in the store/index file' do
+    it '@stores should be available in stores/index page' do
       store = create(:store)
       get :index, user_id: store.user_id
       expect(assigns(:stores)).to_not be_empty
