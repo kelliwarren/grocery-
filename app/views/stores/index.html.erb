@@ -1,3 +1,3 @@
 <% @stores.each do |store| %>
-<%= link_to(store.name, user_store_path(store.user, store))%> <br />
+store name: <%= link_to(store.name, user_store_path(store.user, store))%> <br />
 <% end %>
