@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe StoresController do
   describe '#index' do
-    it 'should assign the @stores in the stores/index page' do
+    it 'should make @stores available in the store/index file' do
       store = create(:store)
       get :index, user_id: store.user_id
       expect(assigns(:stores)).to_not be_empty
@@ -15,7 +15,7 @@ describe StoresController do
       post :create, {user_id: user.id, :store => store.attributes }
       expect(user.stores.count).to eq(0)
     end
-    it 'should allow a user to create a store' do
+    it 'should allow a user who is a store_owner to create a store' do
       user = create(:user, store_owner: true)
       store = build(:store)
       post :create, {user_id: user.id, :store => store.attributes }
