@@ -11,7 +11,7 @@ describe ProductsController do
       expect(assigns(@products)).to_not be_empty
     end
   end
-  describe '#show', :focus do 
+  describe '#show' do 
     it "should be available to show view" do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
@@ -21,24 +21,22 @@ describe ProductsController do
     end
   end
 
-  describe '#create'do
+  describe '#create', :focus do
     it 'should not allow a user who is not a store owner to create a product' do
       user = create(:user)
       store = create(:store, user_id: user.id)
-      product = build(:product)
+      product = create(:product)
       post :create, {user_id: user.id, store_id: store.id, :product => product.attributes }
-      expect(user.products.count).to eq(0)
+      expect(store.products.count).to eq(0)
     end
-
     it 'should allow a user who is a store_owner to create a product' do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
-      product = build(:product)
+      product = build(:product, store_id: store.id)
       post :create, {user_id: user.id, store_id: store.id, :product => product.attributes }
-      expect(user.products.count).to eq(1)
+      expect(store.products.count).to eq(1)
     end
   end
-
   describe '#update' do
     it 'should not allow a user who is not a store owner to update a product' do
       user = create(:user)

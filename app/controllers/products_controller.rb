@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
+      
       redirect_to user_store_product_path(@user, @store, @product)
     else
       render :new
@@ -47,7 +48,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity, :image)
+    params.require(:product).permit(:name, :description, :price, :quantity, :image, :store_id)
   end
 
   def store_owner?
