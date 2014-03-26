@@ -1,4 +1,5 @@
 
+
 require 'spec_helper'
 
 describe Product do
@@ -17,3 +18,4 @@ describe 'associations' do
   it {should belong_to :store }
   end
 end
+
