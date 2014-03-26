@@ -7,32 +7,32 @@ describe ProductsController do
       product = create(:product)
       store = create(:store, user_id: user.id)
       store.products << product
-      get :index, {user_id: user, store_id: store}
+      get :index, user_id: user.id, store_id: store.id
       expect(assigns(@products)).to_not be_empty
     end
   end
   describe '#show' do 
     it "should be available to show view" do
       user = create(:user, store_owner: true)
-      store = create(:store, user_id: user.id)
-      get :show, user_id: user.id, id: store.id
+      product = create(:product, user_id: user.id)
+      get :show, user_id: user.id, id: product.id
       response.should be_success
     end
   end
 
   describe '#create'do
-    it 'should not allow a user who is not a store owner to create a store' do
+    it 'should not allow a user who is not a store owner to create a product' do
       user = create(:user)
-      store = build(:store)
-      post :create, {user_id: user.id, :store => store.attributes }
-      expect(user.stores.count).to eq(0)
+      product = build(:product)
+      post :create, {user_id: user.id, :product => product.attributes }
+      expect(user.products.count).to eq(0)
     end
 
-    it 'should allow a user who is a store_owner to create a store' do
+    it 'should allow a user who is a store_owner to create a product' do
       user = create(:user, store_owner: true)
-      store = build(:store)
-      post :create, {user_id: user.id, :store => store.attributes }
-      expect(user.stores.count).to eq(1)
+      store = build(:product)
+      post :create, {user_id: user.id, :product => product.attributes }
+      expect(user.products.count).to eq(1)
     end
   end
 
