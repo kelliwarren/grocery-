@@ -3,7 +3,7 @@ class StoresController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @stores = @user.stores  
+    @stores = @user.stores
   end
 
   def new
