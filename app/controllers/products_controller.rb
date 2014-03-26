@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :store_owner?, except: [:index, :show]
-  before_action :user_store_ids
+  before_action :set_user_id
+  before_action :set_store_id
+
   def index
     @products = @store.products
     redirect_to user_store_products(@user, @store)
