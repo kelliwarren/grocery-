@@ -5,20 +5,20 @@ class ProductsController < ApplicationController
 
   def index
     @products = @store.products
-    redirect_to user_store_products(@user, @store)
+    redirect_to user_store_products_path(@user, @store)
   end
   def show
     @product = @store.products.find(params[:id])
-    redirect_to user_store_product(@user, @store, @product)
+    redirect_to user_store_product_path(@user, @store, @product)
   end
   def new
     @products = Product.new
-    redirect_to  new_user_store_product(@user, @store)
+    redirect_to  new_user_store_product_path(@user, @store)
   end
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to user_store_product(@user, @store, @product)
+      redirect_to user_store_product_path(@user, @store, @product)
     else
       render :new
     end
@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update_attributes(product_params)
-      redirect_to user_store_products(@user, @store)
+      redirect_to user_store_products_path(@user, @store)
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     @product.delete
-    redirect_to user_store_products(@user, @store)
+    redirect_to user_store_products_path(@user, @store)
   end
 
   private
