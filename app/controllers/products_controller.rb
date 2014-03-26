@@ -5,15 +5,12 @@ class ProductsController < ApplicationController
 
   def index
     @products = @store.products
-    redirect_to user_store_products_path(@user, @store)
   end
   def show
     @product = @store.products.find(params[:id])
-    redirect_to user_store_product_path(@user, @store, @product)
   end
   def new
     @products = Product.new
-    redirect_to  new_user_store_product_path(@user, @store)
   end
   def create
     @product = Product.new(product_params)
