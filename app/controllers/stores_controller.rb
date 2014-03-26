@@ -7,12 +7,10 @@ class StoresController < ApplicationController
   end
 
   def new
-    # @user = User.find(params[:user_id])
     @store = @user.stores.build
   end
 
   def create
-    # @user = User.find(params[:user_id])
     @store = @user.stores.build(store_params)
     if @store.save
       redirect_to user_path(@user)
@@ -27,13 +25,10 @@ class StoresController < ApplicationController
   end
 
   def edit
-    # @user = User.find(params[:user_id])
     @store = @user.stores.find(params[:id])
   end
 
   def update
-
-    # @user = User.find(params[:user_id])
     @store = @user.stores.find(params[:id])
     if @store.update_attributes(store_params)
       redirect_to users_path
@@ -43,9 +38,7 @@ class StoresController < ApplicationController
   end
 
   def destroy
-
     @store = Store.find(params[:id])
-    # @user = User.find(@store.user_id)
     @store.destroy
     redirect_to users_path
   end
@@ -59,6 +52,7 @@ class StoresController < ApplicationController
       flash[:alert] = "you are not a store owner"
       redirect_to edit_user_registration_path(@user)
     end
+     @user = User.find(params[:user_id])
   end
 
   def store_params

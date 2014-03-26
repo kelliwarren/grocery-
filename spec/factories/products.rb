@@ -5,7 +5,8 @@ FactoryGirl.define do
     name "MyString"
     price 9.99
     quantity 1
-    image "MyString"
+    image "MyString.jpg"
     description "MyText"
+    store { create(:store) }
   end
 end
