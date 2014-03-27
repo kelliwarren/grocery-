@@ -37,41 +37,40 @@ describe ProductsController do
       expect(store.products.count).to eq(1)
     end
   end
-  describe '#update', :focus do
+  describe '#update' do
     it 'should not allow a user who is not a store owner to update a product' do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
-      product = build(:product, store_id: store.id)
-      store.products << product
-      put :update, { user_id: store.user.id, store_id: store.id, id: product.id, :product => {name: 'new name'} }
-      expect(store.product.last.name).to_not eq('new name')
+      user2 = create(:user)
+      product = create(:product, store_id: store.id)
+      put :update, { user_id: user2.id, store_id: store.id, id: product.id, :product => {name: 'new name'}}
+      expect(store.products.last.name).to_not eq('new name')
     end
     it 'should allow a user.store_owner to update a record' do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
-      product = build(:product, store_id: store.id)
-      store.products << product
-      put :update, { user_id: store.user.id, store_id: store.id, id: product.id, :product =>{name: 'new name'} }
-      expect(user.stores.last.name).to eq('new name')
+      product = create(:product, store_id: store.id)
+      put :update, { user_id: user.id, store_id: store.id, id: product.id, :product => {name: 'new name'}}
+      expect(store.products.last.name).to eq('new name')
     end
   end
 
   describe '#destroy' do
     it 'should not allow a user who is not a store owner to delete a product' do
-      user = create(:user)
-      store = create(:store)
-      product = create(:product)
-      store.products << product
-      delete :destroy,{ user_id: store.user.id, store_id: store.id, id: product.id }
-      expect(user.stores.count).to eq(1)
+      user = create(:user, store_owner: true)
+      store = create(:store, user_id: user.id)
+      user2 = create(:user)
+      product = create(:product, store_id: store.id)
+      delete :destroy,{ user_id: user2.id, store_id: store.id, id: product.id }
+      expect(store.products.count).to_not eq(0)
     end
     
     it 'should allow a user.store_owner to delete a store' do
       user = create(:user, store_owner: true)
-      store = create(:store)
-      user.stores << store
-      delete :destroy,{ user_id: store.user.id, store_id: store.id, id: product.id }
-      expect(user.stores.count).to eq(0)
+      store = create(:store, user_id: user.id)
+      product = create(:product, store_id: store.id)
+      delete :destroy,{ user_id: user.id, store_id: store.id, id: product.id }
+      expect(store.products.count).to eq(0)
     end
   end
 
