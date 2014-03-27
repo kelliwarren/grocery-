@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      
+
       redirect_to user_store_product_path(@user, @store, @product)
     else
       render :new
