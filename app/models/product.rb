@@ -8,6 +8,10 @@ class Product < ActiveRecord::Base
   :message => 'must be a URL for GIF, JPG or PNG image.' }
 
   belongs_to :store
+<<<<<<< HEAD
   has_and_belongs_to_many :orders
  
+=======
+ has_and_belongs_to_many :orders
+>>>>>>> abf23a8a8ec88d5b85ba0b3827453b0a087b114f
 end
