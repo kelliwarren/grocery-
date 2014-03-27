@@ -10,12 +10,12 @@ class ProductsController < ApplicationController
     @product = @store.products.find(params[:id])
   end
   def new
-    @products = Product.new
+    @product = Product.new
   end
   def create
     @product = Product.new(product_params)
     if @product.save
-      
+
       redirect_to user_store_product_path(@user, @store, @product)
     else
       render :new
@@ -53,8 +53,10 @@ class ProductsController < ApplicationController
 
   def store_owner?
     @user = User.find(params[:user_id])
-    true if @user.store_owner
-    false
+    if @user.store_owner
+      return true
+    else
+      redirect_to root_path
+    end
   end
-
 end
