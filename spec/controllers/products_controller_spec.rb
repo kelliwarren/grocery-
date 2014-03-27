@@ -42,21 +42,20 @@ describe ProductsController do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
       user2 = create(:user)
-      product = build(:product, store_id: store.id)
+      product = create(:product, store_id: store.id)
       put :update, { user_id: user2.id, store_id: store.id, id: product.id, :product => {name: 'new name'}}
       expect(store.products.last.name).to_not eq('new name')
     end
     it 'should allow a user.store_owner to update a record' do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
-      product = build(:product, store_id: store.id)
-      store.products << product
+      product = create(:product, store_id: store.id)
       put :update, { user_id: user.id, store_id: store.id, id: product.id, :product => {name: 'new name'}}
       expect(store.products.last.name).to eq('new name')
     end
   end
 
-  describe '#destroy', :focus do
+  describe '#destroy' do
     it 'should not allow a user who is not a store owner to delete a product' do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
