@@ -4,11 +4,11 @@
 <%= user.name %>
 <%= user.email %>
 <%= user.phone %>
-<%= user.store_owner %>
-<%= user.stores.each do |store| %>
-<%= store.name %>
-<%= store.products.each do |product| %>
-<%= product.name %>
+<%= user.store_owner %><br />
+<% user.stores.each do |store| %>
+store name: <%= store.name %><br />
+<% store.products.each do |product| %>
+product name: <%= product.name %><br />
 <% end %>
 <% end %>
 <br />
