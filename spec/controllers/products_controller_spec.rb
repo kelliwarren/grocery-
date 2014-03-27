@@ -21,7 +21,7 @@ describe ProductsController do
     end
   end
 
-  describe '#create', :focus do
+  describe '#create' do
     it 'should not allow a user who is not a store owner to create a product' do
       user = create(:user)
       store = create(:store, user_id: user.id)
@@ -37,19 +37,19 @@ describe ProductsController do
       expect(store.products.count).to eq(1)
     end
   end
-  describe '#update' do
+  describe '#update', :focus do
     it 'should not allow a user who is not a store owner to update a product' do
-      user = create(:user)
-      store = create(:store)
-      product = create(:product)
+      user = create(:user, store_owner: true)
+      store = create(:store, user_id: user.id)
+      product = build(:product, store_id: store.id)
       store.products << product
-      put :update, { user_id: store.user.id, store_id: store.id, id: product.id, :product =>{name: 'new name'} }
-      expect(user.store.product.last.name).to_not eq('new name')
+      put :update, { user_id: store.user.id, store_id: store.id, id: product.id, :product => {name: 'new name'} }
+      expect(store.product.last.name).to_not eq('new name')
     end
     it 'should allow a user.store_owner to update a record' do
-      user = create(:user)
-      store = create(:store)
-      product = create(:product)
+      user = create(:user, store_owner: true)
+      store = create(:store, user_id: user.id)
+      product = build(:product, store_id: store.id)
       store.products << product
       put :update, { user_id: store.user.id, store_id: store.id, id: product.id, :product =>{name: 'new name'} }
       expect(user.stores.last.name).to eq('new name')
