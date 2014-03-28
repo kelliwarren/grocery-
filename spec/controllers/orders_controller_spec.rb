@@ -21,20 +21,20 @@ describe OrdersController do
   end
 
     describe '#show' do 
-    it "should be available to show store's orders" do
+    it "should be available to show store's order" do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
       order = create(:order)
-      get :show, store_id: store.id
+      get :show, order_id: order.id
       response.should be_success
     end
   
 
-   it "should be available to show consumer's oders" do
+   it "should be available to show consumer's order" do
       consumer = create(:user)
       store = create(:store)
       order = create(:order)
-      get :show, store_id: store.id
+      get :show, order_id: order.id
       response.should be_success
     end
   end
