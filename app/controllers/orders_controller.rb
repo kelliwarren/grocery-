@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :set_consumer
-  before_action :set_store
+  before_action :set_consumer, execpt:[:index]
+  before_action :set_store, execpt:[:index]
   def index
     if params[:user_id] == nil
       @orders = @store.orders
