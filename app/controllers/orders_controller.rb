@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :set_consumer, except:[:index]
-  before_action :set_store, except:[:index]
+  before_action :set_consumer, except:[:index, :show]
+  before_action :set_store, except:[:index, :show]
   def index
     if params[:user_id] == nil
       @store = Store.find(params[:store_id])
@@ -9,26 +9,15 @@ class OrdersController < ApplicationController
       @consumer = User.find(params[:user_id])
       @orders = @consumer.orders
     end
-    
+
   end
   def show
     @order = Order.find(params[:id])
   end
   def new
-    @store = nil
-    @consumer = nil
-    @order = nil
-    # if
-    #   #logged in
-    # else
-    #   #send them to users/new then after making a user send them back to orders/new
-    # end
   end
   def create
     @order = Order.new(order_params)
-    # if
-    # else
-    # end
   end
   def edit
   end
