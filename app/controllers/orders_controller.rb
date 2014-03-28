@@ -2,8 +2,14 @@ class OrdersController < ApplicationController
   before_action :set_consumer
   before_action :set_store
   def index
+    if params[:user_id] == nil
+      @orders = @store.orders
+    elsif params[:store_id] == nil
+      @orders = @consumer.orders
+    end
   end
   def show
+    @order = Order.find(params[:id])
   end
   def new
     @store = nil
@@ -16,6 +22,10 @@ class OrdersController < ApplicationController
     end
   end
   def create
+    @order = Order.new(order_params)
+    if
+    else
+    end
   end
   def edit
   end
