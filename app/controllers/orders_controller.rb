@@ -3,8 +3,10 @@ class OrdersController < ApplicationController
   before_action :set_store, execpt:[:index]
   def index
     if params[:user_id] == nil
+      @store = Store.find(params[:store_id])
       @orders = @store.orders
     elsif params[:store_id] == nil
+      @consumer = User.find(params[:user_id])
       @orders = @consumer.orders
     end
   end
