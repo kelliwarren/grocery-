@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :order do
+    user { create(:user) }
+    store { create(:store) }
   end
 end
