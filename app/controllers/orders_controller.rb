@@ -12,20 +12,20 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
   def new
-    @store = nil
-    @consumer = nil
-    @order = nil
-    if
-      #logged in
-    else
-      #send them to users/new then after making a user send them back to orders/new
-    end
+    # @store = nil
+    # @consumer = nil
+    # @order = nil
+    # if
+    #   #logged in
+    # else
+    #   #send them to users/new then after making a user send them back to orders/new
+    # end
   end
   def create
     @order = Order.new(order_params)
-    if
-    else
-    end
+    # if
+    # else
+    # end
   end
   def edit
   end
