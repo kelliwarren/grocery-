@@ -1,10 +1,10 @@
 Grocery::Application.routes.draw do
   root to: "users#index"
   resources :users do
-    resources :order
+    resources :orders
   end
   resources :stores do
-    resources :order
+    resources :orders
   end
   devise_for :users
   resources :stores, only: [:show]
