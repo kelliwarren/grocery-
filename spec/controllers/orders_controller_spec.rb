@@ -19,5 +19,24 @@ describe OrdersController do
       expect(assigns(@orders)).to_not be_empty
     end
   end
+
+    describe '#show' do 
+    it "should be available to show store's order" do
+      user = create(:user, store_owner: true)
+      store = create(:store, user_id: user.id)
+      order = create(:order)
+      get :show, order_id: order.id
+      response.should be_success
+    end
+  
+
+   it "should be available to show consumer's order" do
+      consumer = create(:user)
+      store = create(:store)
+      order = create(:order)
+      get :show, order_id: order.id
+      response.should be_success
+    end
+  end
 end
 
