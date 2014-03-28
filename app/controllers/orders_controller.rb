@@ -9,14 +9,15 @@ class OrdersController < ApplicationController
       @consumer = User.find(params[:user_id])
       @orders = @consumer.orders
     end
+    
   end
   def show
     @order = Order.find(params[:id])
   end
   def new
-    # @store = nil
-    # @consumer = nil
-    # @order = nil
+    @store = nil
+    @consumer = nil
+    @order = nil
     # if
     #   #logged in
     # else
