@@ -6,6 +6,8 @@ Grocery::Application.routes.draw do
   resources :stores do
     get '/orders' => 'orders#index'
   end
+  get '/orders/:id' => 'orders#show', as: "order"
+
   devise_for :users
   resources :stores, only: [:show]
   resources :users do
