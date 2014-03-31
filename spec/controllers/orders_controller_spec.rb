@@ -64,7 +64,7 @@ describe OrdersController do
   #   end
   # end
 
-   describe '#destroy', :focus do
+   describe '#destroy' do
      it 'should allow a user.store_owner to delete an order' do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
