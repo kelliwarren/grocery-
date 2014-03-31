@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
   end
   def edit
-    if correct_consumer
+    if correct_permissions?
       @order.delete
       redirect_to user_path(@consumer)
     else
@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
     end
   end
   def destroy
-    if correct_consumer
+    if correct_permissions?
       @order.delete
       redirect_to user_path(@consumer)
     else
@@ -55,13 +55,22 @@ class OrdersController < ApplicationController
   def set_order
     @order = Order.find(params[:id])
   end
-  def correct_consumer
+  def correct_permissions?
     @order = Order.find(params[:id])
-    @consumer = User.find(params[:user_id])
-    if @order.user == @consumer
-      return true
-    else
-      return false
+    if params[:store_id] == nil
+      @consumer = User.find(params[:user_id])
+      if @order.user == @consumer
+        return true
+      else
+        return false
+      end
+    elsif params[:user_id] == nil
+      @store = User.find(params[:store_id])
+      if @order.user == @store
+        return true
+      else
+        return false
+      end
     end
   end
 end
