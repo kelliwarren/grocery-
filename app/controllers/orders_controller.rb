@@ -28,6 +28,10 @@ class OrdersController < ApplicationController
     end
   end
   def update
+    @order = Order.find(params[:id])
+    if order.update_attributes()
+    else
+    end
   end
   def destroy
     if correct_consumer
