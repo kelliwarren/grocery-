@@ -31,6 +31,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if order.update_attributes()
     else
+      render :edit
     end
   end
   def destroy
