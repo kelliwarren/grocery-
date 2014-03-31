@@ -1,0 +1,80 @@
+                  Prefix Verb   URI Pattern                                                  Controller#Action
+                    root GET    /                                                            users#index
+             add_to_cart POST   /add_to_cart/:id(.:format)                                   application#add_to_cart
+          checkout_index GET    /checkout(.:format)                                          checkout#index
+                         POST   /checkout(.:format)                                          checkout#create
+            new_checkout GET    /checkout/new(.:format)                                      checkout#new
+           edit_checkout GET    /checkout/:id/edit(.:format)                                 checkout#edit
+                checkout GET    /checkout/:id(.:format)                                      checkout#show
+                         PATCH  /checkout/:id(.:format)                                      checkout#update
+                         PUT    /checkout/:id(.:format)                                      checkout#update
+                         DELETE /checkout/:id(.:format)                                      checkout#destroy
+             user_orders GET    /users/:user_id/orders(.:format)                             orders#index
+                         POST   /users/:user_id/orders(.:format)                             orders#create
+          new_user_order GET    /users/:user_id/orders/new(.:format)                         orders#new
+         edit_user_order GET    /users/:user_id/orders/:id/edit(.:format)                    orders#edit
+              user_order GET    /users/:user_id/orders/:id(.:format)                         orders#show
+                         PATCH  /users/:user_id/orders/:id(.:format)                         orders#update
+                         PUT    /users/:user_id/orders/:id(.:format)                         orders#update
+                         DELETE /users/:user_id/orders/:id(.:format)                         orders#destroy
+                   users GET    /users(.:format)                                             users#index
+                         POST   /users(.:format)                                             users#create
+                new_user GET    /users/new(.:format)                                         users#new
+               edit_user GET    /users/:id/edit(.:format)                                    users#edit
+                    user GET    /users/:id(.:format)                                         users#show
+                         PATCH  /users/:id(.:format)                                         users#update
+                         PUT    /users/:id(.:format)                                         users#update
+                         DELETE /users/:id(.:format)                                         users#destroy
+                         GET    /stores/:id(.:format)                                        stores#show
+                         GET    /                                                            stores#edit
+            store_orders GET    /stores/:store_id/orders(.:format)                           orders#index
+                         DELETE /stores/:store_id/orders/:id(.:format)                       orders#destroy
+                  stores GET    /stores(.:format)                                            stores#index
+                         POST   /stores(.:format)                                            stores#create
+               new_store GET    /stores/new(.:format)                                        stores#new
+              edit_store GET    /stores/:id/edit(.:format)                                   stores#edit
+                   store GET    /stores/:id(.:format)                                        stores#show
+                         PATCH  /stores/:id(.:format)                                        stores#update
+                         PUT    /stores/:id(.:format)                                        stores#update
+                         DELETE /stores/:id(.:format)                                        stores#destroy
+                   order GET    /orders/:id(.:format)                                        orders#show
+        new_user_session GET    /users/sign_in(.:format)                                     devise/sessions#new
+            user_session POST   /users/sign_in(.:format)                                     devise/sessions#create
+    destroy_user_session DELETE /users/sign_out(.:format)                                    devise/sessions#destroy
+           user_password POST   /users/password(.:format)                                    devise/passwords#create
+       new_user_password GET    /users/password/new(.:format)                                devise/passwords#new
+      edit_user_password GET    /users/password/edit(.:format)                               devise/passwords#edit
+                         PATCH  /users/password(.:format)                                    devise/passwords#update
+                         PUT    /users/password(.:format)                                    devise/passwords#update
+cancel_user_registration GET    /users/cancel(.:format)                                      devise/registrations#cancel
+       user_registration POST   /users(.:format)                                             devise/registrations#create
+   new_user_registration GET    /users/sign_up(.:format)                                     devise/registrations#new
+  edit_user_registration GET    /users/edit(.:format)                                        devise/registrations#edit
+                         PATCH  /users(.:format)                                             devise/registrations#update
+                         PUT    /users(.:format)                                             devise/registrations#update
+                         DELETE /users(.:format)                                             devise/registrations#destroy
+                         GET    /stores/:id(.:format)                                        stores#show
+     user_store_products GET    /users/:user_id/stores/:store_id/products(.:format)          products#index
+                         POST   /users/:user_id/stores/:store_id/products(.:format)          products#create
+  new_user_store_product GET    /users/:user_id/stores/:store_id/products/new(.:format)      products#new
+ edit_user_store_product GET    /users/:user_id/stores/:store_id/products/:id/edit(.:format) products#edit
+      user_store_product GET    /users/:user_id/stores/:store_id/products/:id(.:format)      products#show
+                         PATCH  /users/:user_id/stores/:store_id/products/:id(.:format)      products#update
+                         PUT    /users/:user_id/stores/:store_id/products/:id(.:format)      products#update
+                         DELETE /users/:user_id/stores/:store_id/products/:id(.:format)      products#destroy
+             user_stores GET    /users/:user_id/stores(.:format)                             stores#index
+                         POST   /users/:user_id/stores(.:format)                             stores#create
+          new_user_store GET    /users/:user_id/stores/new(.:format)                         stores#new
+         edit_user_store GET    /users/:user_id/stores/:id/edit(.:format)                    stores#edit
+              user_store GET    /users/:user_id/stores/:id(.:format)                         stores#show
+                         PATCH  /users/:user_id/stores/:id(.:format)                         stores#update
+                         PUT    /users/:user_id/stores/:id(.:format)                         stores#update
+                         DELETE /users/:user_id/stores/:id(.:format)                         stores#destroy
+                         GET    /users(.:format)                                             users#index
+                         POST   /users(.:format)                                             users#create
+                         GET    /users/new(.:format)                                         users#new
+                         GET    /users/:id/edit(.:format)                                    users#edit
+                         GET    /users/:id(.:format)                                         users#show
+                         PATCH  /users/:id(.:format)                                         users#update
+                         PUT    /users/:id(.:format)                                         users#update
+                         DELETE /users/:id(.:format)                                         users#destroy
