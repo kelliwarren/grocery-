@@ -7,6 +7,17 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <div>
+      <div class="pull-right">
+        <h3>Cart: <%= session[:product].length unless session[:product].empty? %> items</h3>
+        <%= link_to('Checkout', checkout_index_path, class: 'btn btn-primary') %>
+      </div>
+      <%#= raise session["product"].inspect %>
+      <%#= (session[:product]).each do |product, quantity| %>
+        <%#= product %>
+      <%# end %>
+    </div>
+  
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <div style='border:1px solid black'>
