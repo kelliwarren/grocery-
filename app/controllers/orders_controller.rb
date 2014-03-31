@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :set_consumer, except:[:index, :show]
-  before_action :set_store, except:[:index, :show]
+  # before_action :set_consumer, except:[:index, :show]
+  # before_action :set_store, except:[:index, :show]
   def index
     if params[:user_id] == nil
       @store = Store.find(params[:store_id])
@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
       @consumer = User.find(params[:user_id])
       @orders = @consumer.orders
     end
-
   end
   def show
     @order = Order.find(params[:id])
@@ -35,7 +34,17 @@ class OrdersController < ApplicationController
   def set_store
     @store = Store.find(params[:store_id])
   end
+  def set_order
+    @order = Order.find(params[:id])
+  end
   def correct_consumer
+    @order = Order.find(params[:id])
+    @consumer = User.find(params[:user_id])
+    if @order.user == @consumer
+      return true
+    else
+      return false
+    end
   end
 end
 
