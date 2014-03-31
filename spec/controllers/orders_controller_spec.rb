@@ -40,7 +40,7 @@ describe OrdersController do
   end
 
 
-   describe '#create', :focus do
+   describe '#create' do
 
     it 'should allow a consumer to create an order' do
       consumer = create(:user)
@@ -51,16 +51,34 @@ describe OrdersController do
     end
   end
 
-  describe '#update' do
+  # describe '#update' do
 
-    it 'should allow a consumer to update an order' do
+  #   it 'should allow a consumer to update an order' do
+  #     consumer = create(:user)
+  #     store = create(:store)
+  #     order = create(:order)
+  #     product = create(:product, store_id: store.id)
+  #     order.products << product
+  #     put :update, { user_id: consumer.id, store_id: store.id, id: product.id, :product => {name: 'new name'}}
+  #     expect(order.products.last.name).to eq('new name')
+  #   end
+  # end
+
+   describe '#destroy', :focus do
+     it 'should allow a user.store_owner to delete an order' do
+      user = create(:user, store_owner: true)
+      store = create(:store)
+      order = create(:order)
+      delete :destroy,{ store_id: store.id, id: order.id }
+      expect(store.orders.count).to eq(0)
+    end
+
+     it 'should allow a consumer to delete an order' do
       consumer = create(:user)
       store = create(:store)
       order = create(:order)
-      product = create(:product, store_id: store.id)
-      order.products << product
-      put :update, { user_id: consumer.id, store_id: store.id, id: product.id, :product => {name: 'new name'}}
-      expect(order.products.last.name).to eq('new name')
+      delete :destroy,{ user_id: consumer.id, id: order.id }
+      expect(consumer.orders.count).to eq(0)
     end
   end
 
