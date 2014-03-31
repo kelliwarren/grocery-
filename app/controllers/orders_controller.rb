@@ -37,9 +37,9 @@ class OrdersController < ApplicationController
   def destroy
     if correct_permissions?
       @order.delete
-      redirect_to user_path(@consumer)
+      redirect_to root_path
     else
-      redirect_to user_path(@consumer)
+      redirect_to root_path
     end
   end
   private
@@ -56,18 +56,19 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
   def correct_permissions?
+    puts params
     @order = Order.find(params[:id])
     if params[:store_id] == nil
       @consumer = User.find(params[:user_id])
       if @order.user == @consumer
-        return true
+        return @order
       else
         return false
       end
     elsif params[:user_id] == nil
-      @store = User.find(params[:store_id])
+      @store = Store.find(params[:store_id])
       if @order.user == @store
-        return true
+        return @order
       else
         return false
       end
