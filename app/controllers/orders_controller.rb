@@ -14,15 +14,28 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
   def new
+    @order = Order.new()
   end
   def create
     @order = Order.new(order_params)
   end
   def edit
+    if correct_consumer
+      @order.delete
+      redirect_to user_path(@consumer)
+    else
+      redirect_to user_path(@consumer)
+    end
   end
   def update
   end
   def destroy
+    if correct_consumer
+      @order.delete
+      redirect_to user_path(@consumer)
+    else
+      redirect_to user_path(@consumer)
+    end
   end
   private
   def order_params
