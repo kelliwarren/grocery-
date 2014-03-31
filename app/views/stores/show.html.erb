@@ -6,5 +6,5 @@
 <%= @store.user.name%><br />
 <% @store.products.each do |product|%>
 <%= product.name %>
-<%= link_to('add to cart') %>
+<%= link_to('add to cart',add_to_cart_path(product), method: :post) %>
 <% end %>
