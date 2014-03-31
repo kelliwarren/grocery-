@@ -8,6 +8,7 @@ Grocery::Application.routes.draw do
 
   resources :stores do
     get '/orders' => 'orders#index'
+    delete '/orders/:id' => 'orders#destroy'
   end
 
   get '/orders/:id' => 'orders#show', as: "order"
