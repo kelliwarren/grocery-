@@ -3,7 +3,7 @@ Grocery::Application.routes.draw do
   root to: "users#index"
 
   resources :users do
-    get '/orders' => 'orders#index'
+    resources :orders
   end
 
   resources :stores do

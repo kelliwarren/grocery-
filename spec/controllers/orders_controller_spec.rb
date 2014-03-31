@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe OrdersController do
-  describe '#index' do 
-    it 'should list all orders for a store' do 
+  describe '#index' do
+    it 'should list all orders for a store' do
       user = create(:user, store_owner: true)
       order = create(:order)
       store = create(:store, user_id: user.id)
@@ -10,7 +10,7 @@ describe OrdersController do
       get :index, store_id: store.id
       expect(assigns(@orders)).to_not be_empty
     end
-     it 'should list all orders for a consumer' do 
+     it 'should list all orders for a consumer' do
       consumer = create(:user)
       order = create(:order)
       store = create(:store)
@@ -20,7 +20,7 @@ describe OrdersController do
     end
   end
 
-    describe '#show' do 
+    describe '#show' do
     it "should be available to show store's order" do
       user = create(:user, store_owner: true)
       store = create(:store, user_id: user.id)
@@ -28,7 +28,7 @@ describe OrdersController do
       get :show, id: order.id
       response.should be_success
     end
-  
+
 
    it "should be available to show consumer's order" do
       consumer = create(:user)
@@ -39,13 +39,14 @@ describe OrdersController do
     end
   end
 
+
    describe '#create', :focus do
-  
+
     it 'should allow a consumer to create an order' do
       consumer = create(:user)
       store = create(:store)
-      order = create(:order)
-      post :create, id: order.id
+      order = create(:order, user_id: consumer, store_id: store)
+      post :create, user_id: consumer.id, order: order.attributes
       expect(order.count).to eq(1)
     end
   end
