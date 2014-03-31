@@ -6,7 +6,7 @@
 <%= user.phone %>
 <%= user.store_owner %><br />
 <% user.stores.each do |store| %>
-store name: <%= store.name %><br />
+store name: <%= link_to(store.name, store_path(store)) %><br />
 <% store.products.each do |product| %>
 product name: <%= product.name %><br />
 <% end %>

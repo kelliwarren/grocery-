@@ -20,8 +20,8 @@ class StoresController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user_id])
-    @store = @user.stores.find(params[:id])
+    # @user = User.find(params[:user_id])
+    @store = Store.find(params[:id])
   end
 
   def edit
