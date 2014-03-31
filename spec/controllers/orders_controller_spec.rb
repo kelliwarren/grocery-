@@ -67,7 +67,7 @@ describe OrdersController do
    describe '#destroy', :focus do
      it 'should allow a user.store_owner to delete an order' do
       user = create(:user, store_owner: true)
-      store = create(:store)
+      store = create(:store, user_id: user.id)
       order = create(:order)
       delete :destroy,{ store_id: store.id, id: order.id }
       expect(store.orders.count).to eq(0)
@@ -81,13 +81,5 @@ describe OrdersController do
       expect(consumer.orders.count).to eq(0)
     end
   end
-
-
-
-
-
-
-
-
 end
 
