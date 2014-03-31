@@ -39,7 +39,7 @@ describe OrdersController do
     end
   end
 
-   describe '#create' do
+   describe '#create', :focus do
   
     it 'should allow a consumer to create an order' do
       consumer = create(:user)
@@ -58,7 +58,7 @@ describe OrdersController do
       order = create(:order)
       product = create(:product, store_id: store.id)
       order.products << product
-      put :update, { user_id: user.id, store_id: store.id, id: product.id, :product => {name: 'new name'}}
+      put :update, { user_id: consumer.id, store_id: store.id, id: product.id, :product => {name: 'new name'}}
       expect(order.products.last.name).to eq('new name')
     end
   end
