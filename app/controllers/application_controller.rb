@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def add_to_cart
     @product = Product.find(params[:id])
     session[:product] << @product.id
-    redirect_to root_path
+    redirect_to store_path(@product.store)
   end
 
   protected
