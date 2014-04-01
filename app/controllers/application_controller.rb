@@ -18,6 +18,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def current_cart
+    Cart.find(session[:cart_id])
+  rescue ActiveREcord::RecordNotfound
+    cart = Cart.create
+    session[:cart_id] = cart.id
+    cart
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:sign_up) << :phone

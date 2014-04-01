@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  has_and_belongs_to_many :products
+  has_many :line_items
   belongs_to :user
   belongs_to :store
 end
