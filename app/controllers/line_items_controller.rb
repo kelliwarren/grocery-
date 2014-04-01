@@ -2,7 +2,7 @@ class LineItemsController < ApplicationController
   def create
     @order = current_order
     product = Product.find(params[:product_id])
-    @line_item = @order.line_items.build(product: product)
+    @line_item = @order.add_product(product.id)
     if @line_item.save
       redirect_to order_path(@order)
     else
