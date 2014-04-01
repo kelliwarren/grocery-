@@ -1,10 +1,35 @@
-<%= @store.name %><br />
-<%= @store.street_address %><br />
-<%= @store.city %><br />
-<%= @store.state %><br />
-<%= @store.zip %><br />
-<%= @store.user.name%><br />
-<% @store.products.each do |product|%>
+<% if current_user && current_user.store_owner %>
+  <%= link_to('show all your stores',user_stores_path(@store.user)) %><br />
+<% end %>
+<div style='border: 1px solid black; width:50%; top:10px; right:0; position:fixed'>
+ <% if session[:order_id] %>
+ <% a = Order.find(session[:order_id]) %>
+ <% a.line_items.each do |item| %>
+ Item: <%= item.product.name %><%= item.quantity %><br/>
+ <% end %><br/>
+  <% else %>
+  no
+<% end %>
+<%= link_to('checkout',order_path(session[:order_id])) %><br/><br/>
+</div>
+
+
+
+store name: <%= @store.name %><br />
+street_address: <%= @store.street_address %><br />
+city: <%= @store.city %><br />
+state: <%= @store.state %><br />
+zip: <%= @store.zip %><br />
+Products: <% @store.products.each do |product|%>
 <%= product.name %>
 <%= button_to('add to order',line_items_path(product_id: product)) %>
+<% end %><br />
+
+
+
+
+<% if current_user && current_user.store_owner %>
+  <%= link_to('All the orders for this store',store_orders_path(@store)) %>
+  <% else %>
+  you are not a store owner so you are looking at this
 <% end %>

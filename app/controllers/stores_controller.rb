@@ -1,6 +1,8 @@
 class StoresController < ApplicationController
-
+  layout "consumer"
   before_action :ensure_user_a_store_owner!, except: [:show]
+   before_filter :current_order
+
 
   def index
     @user = User.find(params[:user_id])
@@ -14,15 +16,13 @@ class StoresController < ApplicationController
   def create
     @store = @user.stores.build(store_params)
     if @store.save
-      redirect_to user_path(@user)
+      redirect_to store_path(@store)
     else
       render :new
     end
   end
 
   def show
-    layout "consumer"
-    # @user = User.find(params[:user_id])
     @store = Store.find(params[:id])
   end
 
@@ -48,13 +48,15 @@ class StoresController < ApplicationController
 
   private
 
+
+
   def ensure_user_a_store_owner!
-  @user = User.find(params[:user_id])
-   unless @user.store_owner?
+    @user = User.find(params[:user_id])
+    unless @user.store_owner?
       flash[:alert] = "you are not a store owner"
       redirect_to edit_user_registration_path(@user)
     end
-     @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id])
   end
 
   def store_params

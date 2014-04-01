@@ -1,3 +1,7 @@
+total orders: <%= @orders.count %>
 <% @orders.each do |order| %>
 <%= order.created_at %>
+<% end %><br />
+<% if current_user.store_owner %>
+<%= link_to('back to all your stores', user_stores_path(current_user)) %>
 <% end %>

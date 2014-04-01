@@ -6,3 +6,5 @@ one order here:
 <% else %>
 <% end %>
 <% end %>
+<%= button_to('empty cart', user_order_path(@order.store.user,session[:order_id]),method: :delete) %>
+<%= button_to('purchase', checkout_path) %>

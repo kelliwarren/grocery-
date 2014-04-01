@@ -1,6 +1,8 @@
 User.delete_all
 Store.delete_all
 Product.delete_all
+Order.delete_all
+LineItem.delete_all
 
 20.times do
   a = User.create({
@@ -19,7 +21,7 @@ Product.delete_all
     zip: Faker::AddressUS.zip_code,
     user_id: a.id
   })
-  20.times do
+  200.times do
     Product.create({
       name: Faker::Product.product,
       description: Faker::BaconIpsum.words(num = 10).join(" "),
