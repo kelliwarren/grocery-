@@ -1,0 +1,6 @@
+Thank you for your order:<br />
+<% @order.line_items.each do |item| %>
+<%= item.product.name %><br />
+<% end %>
+
+<%= link_to("shop some more", store_path(@order.store)) %>

@@ -35,13 +35,22 @@ class OrdersController < ApplicationController
     end
   end
   def destroy
-    if correct_permissions?
-      @order.delete
-      redirect_to root_path
+
+    set_order
+    store = @order.store
+      if @order.delete
+      session[:order_id] = nil
+      redirect_to store_path(store)
     else
-      redirect_to root_path
+      redirect_to store_path(store)
     end
   end
+
+  def checkout
+    @order = Order.find(session[:order_id])
+    session[:order_id] = nil
+  end
+
   private
   def order_params
     params.require(:order).permit(:store_id, :user_id)
@@ -55,24 +64,24 @@ class OrdersController < ApplicationController
   def set_order
     @order = Order.find(params[:id])
   end
-  def correct_permissions?
-    puts params
-    @order = Order.find(params[:id])
-    if params[:store_id] == nil
-      @consumer = User.find(params[:user_id])
-      if @order.user == @consumer
-        return @order
-      else
-        return false
-      end
-    elsif params[:user_id] == nil
-      @store = Store.find(params[:store_id])
-      if @order.user == @store
-        return @order
-      else
-        return false
-      end
-    end
-  end
+  # def correct_permissions?
+  #   puts params
+  #   @order = Order.find(params[:id])
+  #   if params[:store_id] == nil
+  #     @consumer = User.find(params[:user_id])
+  #     if @order.user == @consumer
+  #       return @order
+  #     else
+  #       return false
+  #     end
+  #   elsif params[:user_id] == nil
+  #     @store = Store.find(params[:store_id])
+  #     if @order.user == @store
+  #       return @order
+  #     else
+  #       return false
+  #     end
+  #   end
+  # end
 end
 

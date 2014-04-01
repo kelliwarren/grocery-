@@ -9,7 +9,7 @@
   <body>
     <div>
     </div>
-    <% if current_user.store_owner == false %>
+    <% if current_user && current_user.store_owner == false %>
     <%= link_to('my order', order_path(session[:order_id])) %>
       <div style="border:1px solid black">
         <% Order.find(session[:order_id]).line_items.each do |item| %>
@@ -20,6 +20,9 @@
         <% end %>
       </div>
        <% else %>
+    <% end %>
+      <% if current_user %>
+      <%= link_to("logout", destroy_user_session_path, method: :delete) %>
     <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

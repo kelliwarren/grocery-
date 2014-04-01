@@ -1,7 +1,8 @@
 class StoresController < ApplicationController
   layout "consumer"
   before_action :ensure_user_a_store_owner!, except: [:show]
-  before_filter :current_order
+   before_filter :current_order
+
 
   def index
     @user = User.find(params[:user_id])
@@ -47,20 +48,7 @@ class StoresController < ApplicationController
 
   private
 
-  def current_order
-    if current_user.store_owner
-      return true
-    else
-      if session[:order_id]
-        Order.find(session[:order_id])
-      else
-        store = params[:id]
-        order = store.order.create
-        session[:order_id] = order.id
-        order
-      end
-    end
-  end
+
 
   def ensure_user_a_store_owner!
     @user = User.find(params[:user_id])

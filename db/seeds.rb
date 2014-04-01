@@ -21,7 +21,7 @@ LineItem.delete_all
     zip: Faker::AddressUS.zip_code,
     user_id: a.id
   })
-  20.times do
+  200.times do
     Product.create({
       name: Faker::Product.product,
       description: Faker::BaconIpsum.words(num = 10).join(" "),
