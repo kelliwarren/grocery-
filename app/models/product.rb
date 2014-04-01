@@ -7,5 +7,5 @@ class Product < ActiveRecord::Base
     :with    => %r{\.(gif|jpg|png)\Z}i,
   :message => 'must be a URL for GIF, JPG or PNG image.' }
   belongs_to :store
-  has_and_belongs_to_many :orders
+  has_many :line_items
 end
