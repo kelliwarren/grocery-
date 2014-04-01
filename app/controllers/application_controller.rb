@@ -19,11 +19,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_cart
-    Cart.find(session[:cart_id])
-  rescue ActiveREcord::RecordNotfound
-    cart = Cart.create
-    session[:cart_id] = cart.id
-    cart
+    if session[:order_id]
+      Order.find(session[:order_id])
+    else
+      order = Order.create
+      session[:order_id] = order.id
+      order
+    end
   end
 
   def configure_permitted_parameters

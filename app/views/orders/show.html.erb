@@ -1,37 +1,4 @@
 one order here:
-<% @order.products.each do |product| %>
-product name: <%= product.name %>
+<% @order.line_items.each do |item| %>
+<%= item.product.name %>
 <% end %>
-
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @product.quantity %>
-</p>
-<p>
-  <strong>Image:</strong>
-  <%= @product.image %>
-</p>
-
-
-<!-- <%= link_to 'Edit', ?_path(@order) %> |
-<%= link_to 'Back', ?_path %> -->
-
-<!-- "Quantity ordered?" -->
-

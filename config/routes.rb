@@ -1,6 +1,7 @@
 Grocery::Application.routes.draw do
 
   root to: "users#index"
+  post '/line_items' => "line_items#create"
 
   post 'add_to_cart/:id' => 'application#add_to_cart', as: 'add_to_cart'
 

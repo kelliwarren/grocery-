@@ -8,11 +8,8 @@
   </head>
   <body>
     <div>
-      <div class="pull-right">
-        <h3>Cart: <%= session[:product].length unless session[:product].empty? %> items</h3>
-        <%= link_to('Checkout', checkout_index_path, class: 'btn btn-primary') %>
-      </div>
     </div>
+    <%= link_to('my order', order_path(session[:order_id])) %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
