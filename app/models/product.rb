@@ -8,4 +8,15 @@ class Product < ActiveRecord::Base
   :message => 'must be a URL for GIF, JPG or PNG image.' }
   belongs_to :store
   has_many :line_items
+  before_destroy :ensure_not_referenced_by_any_line_item
+
+  private
+  def ensure_not_referenced_by_any_line_item
+    if line_items.empty?
+      true
+    else
+      errors.add(:base, 'line item present')
+      false
+    end
+  end
 end
