@@ -1,6 +1,8 @@
 User.delete_all
 Store.delete_all
 Product.delete_all
+Order.delete_all
+LineItem.delete_all
 
 20.times do
   a = User.create({

@@ -1,12 +1,12 @@
 Grocery::Application.routes.draw do
 
   devise_for :users
-  
+
   devise_scope :user do
     root to: "devise/sessions#new"
   end
 
- 
+
   post '/line_items' => "line_items#create"
 
   post 'add_to_cart/:id' => 'application#add_to_cart', as: 'add_to_cart'
@@ -27,7 +27,7 @@ Grocery::Application.routes.draw do
 
   get '/orders/:id' => 'orders#show', as: "order"
 
-  
+
   resources :stores, only: [:show]
   resources :users do
     resources :stores do

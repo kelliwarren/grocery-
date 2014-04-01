@@ -17,11 +17,11 @@
 
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-<!--     <% if  params[:store] == nil %>
+  <% if  params[:store] != nil %>
     <%= f.hidden_field :store_owner, value: false %>
-    <% else %>
+  <% else %>
     <%= f.hidden_field :store_owner, value: true %>
-    <% end %> -->
+  <% end %>
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
