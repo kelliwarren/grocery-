@@ -3,22 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :cart
+
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  def cart
-    session[:product] ||= []
-  end
-
-  def add_to_cart
-    @product = Product.find(params[:id])
-    session[:product] << @product.id
-    redirect_to store_path(@product.store)
-  end
 
   protected
 
-  def current_cart
+  def current_order
     if session[:order_id]
       Order.find(session[:order_id])
     else
