@@ -9,10 +9,17 @@
   <body>
     <div>
     </div>
-      <%= link_to('my order', order_path(session[:order_id])) %>
-      <div>
-    <%= session[:order_id] %>
+    <%= link_to('my order', order_path(session[:order_id])) %>
+    <div>
+      <div style="border:1px solid black">
+        <% Order.find(session[:order_id]).line_items.each do |item| %>
+        <% if item.product%>
+        <%= item.product.name %> : <%= item.quantity %><br/>
+        <% else %>
+        <% end %>
+        <% end %>
       </div>
+    </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

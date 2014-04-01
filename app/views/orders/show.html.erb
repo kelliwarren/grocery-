@@ -1,7 +1,8 @@
 one order here:
 <% @order.line_items.each do |item| %>
 <% if item.product%>
-<%= item.product.name %>
+<%= item.product.name %><%= item.quantity %>
+<%= link_to("back to store", store_path(item.product.store)) %><br/>
 <% else %>
 <% end %>
 <% end %>
