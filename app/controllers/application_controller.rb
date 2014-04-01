@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:sign_up) << :phone
   end
+
+  def after_sign_in_path_for(resource)
+    user_stores_path(resource)
+  end
 end
