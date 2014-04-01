@@ -1,4 +1,7 @@
 one order here:
 <% @order.line_items.each do |item| %>
+<% if item.product%>
 <%= item.product.name %>
+<% else %>
+<% end %>
 <% end %>

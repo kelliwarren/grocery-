@@ -9,6 +9,10 @@
   <body>
     <div>
     </div>
+      <%= link_to('my order', order_path(session[:order_id])) %>
+      <div>
+    <%= session[:order_id] %>
+      </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
