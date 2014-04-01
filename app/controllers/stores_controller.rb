@@ -1,5 +1,5 @@
 class StoresController < ApplicationController
-  layout "consumer"
+
   before_action :ensure_user_a_store_owner!, except: [:show]
 
   def index
@@ -21,6 +21,7 @@ class StoresController < ApplicationController
   end
 
   def show
+    layout "consumer"
     # @user = User.find(params[:user_id])
     @store = Store.find(params[:id])
   end
