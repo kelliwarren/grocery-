@@ -1,7 +1,7 @@
 class StoresController < ApplicationController
   layout "consumer"
   before_action :ensure_user_a_store_owner!, except: [:show]
-   before_filter :current_order
+  before_action :current_order
 
 
   def index
@@ -33,7 +33,7 @@ class StoresController < ApplicationController
   def update
     @store = @user.stores.find(params[:id])
     if @store.update_attributes(store_params)
-      redirect_to users_path
+      redirect_to store_path(@store)
     else
       render :edit
     end

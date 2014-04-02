@@ -35,10 +35,9 @@ class OrdersController < ApplicationController
     end
   end
   def destroy
-
     set_order
     store = @order.store
-      if @order.delete
+    if @order.delete
       session[:order_id] = nil
       redirect_to store_path(store)
     else
@@ -47,8 +46,13 @@ class OrdersController < ApplicationController
   end
 
   def checkout
+    @store = Store.find(params[:store_id])
     @order = Order.find(session[:order_id])
-    session[:order_id] = nil
+    if current_user
+      session[:order_id] = nil
+    else
+      redirect_to new_user_registration_path(consumer: true)
+    end
   end
 
   private

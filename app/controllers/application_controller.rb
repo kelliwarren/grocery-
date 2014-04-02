@@ -7,11 +7,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_order
-    if current_user
-      if current_user.store_owner
+
+    if current_user && current_user.store_owner
         session[:order_id] = nil
-        return true
-      end
     else
       if session[:order_id]
         Order.find(session[:order_id])
@@ -29,7 +27,10 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    user_stores_path(resource)
+    if resource.store_owner
+      user_stores_path(resource)
+    else
+      order_path(session[:order_id])
+    end
   end
-
 end

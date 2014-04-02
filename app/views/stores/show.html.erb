@@ -6,7 +6,7 @@
 <% if current_user && current_user.store_owner %>
   <%= link_to('All the orders for this store',store_orders_path(@store)) %>
   <% else %>
-  you are not a store owner so you are looking at this
+consumers view <br/>
 <% end %>
 
  <% if session[:order_id] %>
@@ -25,24 +25,30 @@ store name: <%= @store.name %><br />
 street_address: <%= @store.street_address %><br />
 city: <%= @store.city %><br />
 state: <%= @store.state %><br />
-zip: <%= @store.zip %><br />
+zip: <%= @store.zip %><br /><br/>
 
-<%= link_to('edit this store', edit_store_path(@store, user_id: @store.user)) %><br/><br />
+<% if current_user && current_user.store_owner %>
+  <%= link_to('edit this store', edit_store_path(@store, user_id: @store.user)) %><br/><br />
 
+<%= link_to('all products', products_path(store_id: @store)) %><br/>
+<% end %>
 
-Products:::: <% @store.products.each do |product|%><br/>
+ Products:::: <% @store.products.each do |product|%><br/>
+ <div style='border:2px solid black'>
 <%= product.name %><br />
 <%= product.description %><br />
 <%= product.quantity %><br />
 <%= product.price %><br />
 <%= product.image %><br />
 <% if current_user && current_user.store_owner %>
-<%= link_to('edit this product') %>
+<%= link_to('edit this product',edit_product_path(product, user_id: @store.user)) %>
 <% end %>
-
 <% if session[:order_id] %>
   <%= button_to('add to order',line_items_path(product_id: product)) %>
 <% end %>
+</div>
 <% end %><br />
+
+
 
 
