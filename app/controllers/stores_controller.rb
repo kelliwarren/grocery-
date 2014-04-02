@@ -27,6 +27,7 @@ class StoresController < ApplicationController
   end
 
   def edit
+    raise
     @store = @user.stores.find(params[:id])
   end
 

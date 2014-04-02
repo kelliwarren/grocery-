@@ -1,6 +1,10 @@
 all my stores <br/>
 <% @stores.each do |store| %>
-store name: <%= link_to(store.name, user_store_path(store.user, store))%> <br />
+edit this store or its products: <%= link_to(store.name, user_store_path(store.user, store))%> <br />
+store address:  <%=store.street_address  %><br />
+store city:  <%= store.city %><br />
+store state:  <%= store.state %><br />
+store zip:  <%= store.zip %> <br />
 <% end %>
 
 <%= link_to('Add a store', new_user_store_path(current_user)) %>
