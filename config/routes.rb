@@ -1,8 +1,6 @@
 Grocery::Application.routes.draw do
   devise_for :users
-  # devise_for :users do
-  #   delete '/users/sign_out' => 'devise/sessions#destroy'
-  # end
+
   devise_scope :user do
     root to: "devise/sessions#new"
   end
@@ -18,7 +16,7 @@ Grocery::Application.routes.draw do
   end
 
   get 'stores/:id' => 'stores#show'
-  get '' => 'stores#edit'
+
 
   resources :stores do
     get '/orders' => 'orders#index'

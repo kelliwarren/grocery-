@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def current_order
 
     if current_user && current_user.store_owner
-        session[:order_id] = nil
+      session[:order_id] = nil
     else
       if session[:order_id]
         Order.find(session[:order_id])
@@ -31,6 +31,11 @@ class ApplicationController < ActionController::Base
       user_stores_path(resource)
     else
       order_path(session[:order_id])
+    end
+  end
+  def after_sign_out_path_for(resource)
+    if params[:store]
+      store_path(params[:store])
     end
   end
 end
