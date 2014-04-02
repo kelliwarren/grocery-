@@ -27,8 +27,7 @@ class StoresController < ApplicationController
   end
 
   def edit
-    raise
-    @store = @user.stores.find(params[:id])
+    @store = Store.find(params[:id])
   end
 
   def update
@@ -46,10 +45,7 @@ class StoresController < ApplicationController
     redirect_to users_path
   end
 
-
   private
-
-
 
   def ensure_user_a_store_owner!
     @user = User.find(params[:user_id])

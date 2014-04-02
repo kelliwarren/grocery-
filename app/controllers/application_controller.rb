@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   def current_order
     if current_user
       if current_user.store_owner
+        session[:order_id] = nil
         return true
       end
     else
