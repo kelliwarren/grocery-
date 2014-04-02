@@ -18,14 +18,7 @@
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
-  <% if  params[:store] == nil %>
-
-    <%= f.hidden_field :store_owner, value: false %>
-  <% else %>
-    <%= f.hidden_field :store_owner, value: true %>
-
-    <% end %>
-
+  <%= f.hidden_field :store_owner, value: params[:store].present? %>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
