@@ -7,7 +7,8 @@ contains:<br/>
 <% @order.line_items.each do |item| %>
 <% if item.product%>
 
-<%= item.product.name %>----<%= item.quantity %><br/>
+<%= item.product.name %> Quantity: <%= item.quantity %> Price: <%= item.product.price %>
+ <%= link_to('remove item', user_order_line_item_path(@user, @order, item),method: :delete) %><br/>
 
 <% else %>
 <% end %>

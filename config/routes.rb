@@ -12,7 +12,10 @@ Grocery::Application.routes.draw do
   post 'checkout' => 'orders#checkout'
 
   resources :users do
-    resources :orders
+    resources :orders do
+      resources :line_items
+    end
+
   end
 
   get 'stores/:id' => 'stores#show'
