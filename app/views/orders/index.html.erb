@@ -7,5 +7,5 @@ user:<%= order.user %><br/>
 <% end %>
 <% end %>
 <% if current_user.store_owner %>
-<%= link_to('back to all your stores', user_stores_path(current_user)) %>
+<%= link_to('back to this store', store_path(@orders.first.store)) %>
 <% end %>

@@ -4,18 +4,19 @@ class ProductsController < ApplicationController
   before_action :set_store_id, except: [:edit, :show]
 
   def index
-    @products = @store.products
+    @store
   end
   def show
     @product = Product.find(params[:id])
   end
   def new
+    @store = Store.find(params[:store_id])
     @product = Product.new
   end
   def create
-    @product = Product.new(product_params)
+    @product = @store.products.build(product_params)
     if @product.save
-      redirect_to user_store_product_path(@user, @store, @product)
+     redirect_to store_path(@store)
     else
       render :new
     end
@@ -47,7 +48,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity, :image, :store_id, :user_id)
+    params.require(:product).permit(:name, :description, :price, :quantity, :image, :store, :user_id)
   end
 
   def store_owner?
