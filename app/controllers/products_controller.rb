@@ -1,13 +1,13 @@
 class ProductsController < ApplicationController
   before_action :store_owner?, except: [:index, :show]
   before_action :set_user_id
-  before_action :set_store_id
+  before_action :set_store_id, except: [:edit, :show]
 
   def index
     @products = @store.products
   end
   def show
-    @product = @store.products.find(params[:id])
+    @product = Product.find(params[:id])
   end
   def new
     @product = Product.new
@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
     end
   end
   def edit
-    @products = Product.find(params[:id])
+    @product = Product.find(params[:id])
   end
   def update
     @product = Product.find(params[:id])
@@ -40,18 +40,18 @@ class ProductsController < ApplicationController
   private
 
   def set_user_id
-    @user = User.find(params[:user_id])
+    @user = current_user
   end
   def set_store_id
     @store = Store.find(params[:store_id])
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity, :image, :store_id)
+    params.require(:product).permit(:name, :description, :price, :quantity, :image, :store_id, :user_id)
   end
 
   def store_owner?
-    @user = User.find(params[:user_id])
+    @user = current_user
     if @user.store_owner
       return true
     else

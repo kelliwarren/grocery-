@@ -1,5 +1,6 @@
 Grocery::Application.routes.draw do
   devise_for :users
+
   devise_scope :user do
     root to: "devise/sessions#new"
   end
@@ -15,7 +16,7 @@ Grocery::Application.routes.draw do
   end
 
   get 'stores/:id' => 'stores#show'
-  get '' => 'stores#edit'
+
 
   resources :stores do
     get '/orders' => 'orders#index'
@@ -24,6 +25,7 @@ Grocery::Application.routes.draw do
 
   get '/orders/:id' => 'orders#show', as: "order"
 
+  resources :products
 
   resources :stores, only: [:show]
   resources :users do

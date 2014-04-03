@@ -1,4 +1,9 @@
-<h2>Sign up</h2>
+
+<% if params[:consumer] %>
+  <h3> Please make a guest account</h3>
+  <% else %>
+  <h2>Sign up</h2>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -18,7 +23,11 @@
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
-  <%= f.hidden_field :store_owner, value: params[:store].present? %>
+  <% if  params[:consumer] %>
+    <%= hidden_field_tag params[:store_owner] %>
+  <% else %>
+    <%= f.hidden_field :store_owner, value: true %>
+  <% end %>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
