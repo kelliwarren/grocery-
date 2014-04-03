@@ -26,11 +26,11 @@ Grocery::Application.routes.draw do
   get '/orders/:id' => 'orders#show', as: "order"
 
   resources :products
-
-  resources :stores, only: [:show]
-  resources :users do
-    resources :stores do
+resources :stores do
       resources :products
     end
+  resources :stores, only: [:show]
+  resources :users do
+    resources :stores
   end
 end

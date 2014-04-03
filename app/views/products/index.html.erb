@@ -1,4 +1,6 @@
 <h1>Our Products</h1>
+<%= link_to("back to store", store_path(@store)) %><br/>
+<%= link_to("add product", new_product_path(store_id: @store)) %>
 
 <table>
   <thead>
@@ -14,21 +16,16 @@
   </thead>
 
   <tbody>
-    <% @products.each do |product| %>
+    <% @store.products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
         <td><%= product.image %></td>
         <td><%= product.description %></td>
         <td><%= product.price %></td>
-       <!--  <td><%= product.quantity %></td> -->
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-   <!--  <%=  @products %> -->
   </tbody>
 </table>
-
 <br>
-
-<!-- paginate -->
