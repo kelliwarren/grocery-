@@ -6,7 +6,7 @@ contains:<br/>
 <% end %>
 <% @order.line_items.each do |item| %>
 <% if item.product%>
-<%= item.product.name %><%= item.quantity %>
+<%= item.product.name %>----<%= item.quantity %><br/>
 <% else %>
 <% end %>
 <% end %>

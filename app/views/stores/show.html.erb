@@ -1,9 +1,9 @@
 <% if current_user && current_user.store_owner %>
   <%= link_to('show all your stores',user_stores_path(@store.user)) %><br /><br/>
 <% end %>
-<div style='border: 1px solid black; width:50%; top:10px; right:0; position:fixed'>
-
-<% if current_user && current_user.store_owner %>
+<div style='border: 1px solid black; width:100%;position:fixed; background-color:steelblue; color:white;'>
+<div>
+  <% if current_user && current_user.store_owner %>
   <%= link_to('All the orders for this store',store_orders_path(@store)) %>
   <% else %>
 consumers view <br/>
@@ -33,6 +33,10 @@ zip: <%= @store.zip %><br /><br/>
 <%= link_to('all products', products_path(store_id: @store)) %><br/>
 <% end %>
 
+</div>
+
+<div style='padding-top:300px'>
+
  Products:::: <% @store.products.each do |product|%><br/>
  <div style='border:2px solid black; width: 48%'>
 <%= product.name %><br />
@@ -48,6 +52,8 @@ zip: <%= @store.zip %><br /><br/>
 <% end %>
 </div>
 <% end %><br />
+
+</div>
 
 
 
